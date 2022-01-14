@@ -1,0 +1,60 @@
+{% extends 'Sender/base.html' %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <div class="intro row">
+        <div class="col-9">
+            <h2>Welcome to this demo website</h2>
+            <p style="line-height: 1.6;">
+                These forms are made using bootstrap. So add the initial bootstrap css and js code into
+                your code first. The forms setup are in the html code. Just copy and paste these lines into your code.
+                The whole project is in the github repository. Please visit my other projects.
+            </p>
+            <a style="color: black;" href="https://getbootstrap.com/docs/5.1/getting-started/introduction/">Bootstrap Introduction Page</a><br>
+            <a style="color: black;" href="#">Github Repository</a>
+        </div>
+    </div>
+    
+    {% if message_name %}
+        <br>
+        <br>
+        <div class="email-form row">
+            <center><h2>Thank you {{ message_name }} for reaching us.</h2></center>
+            <center>We will respond to you shortly.</center>
+        </div>
+    {% else %}
+        <div class="email-form row">
+            <div class="col-4"></div>
+            
+            <div class="col-8">
+                <div class="row mb-2">
+                    <h4 style="font-weight: 300;">Get in touch</h4>
+                </div>
+
+                <form action="{% url 'sender-home' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row mb-2">
+                        <div class="col-6 mb-2">
+                            <input type="text" name="message-name" class="form-control" id="exampleFormControlInput1" placeholder="Your Name">
+                        </div>
+                        <div class="col-6 mb-2">
+                            <input type="email" name="message-email" class="form-control" id="exampleFormControlInput1" placeholder="Your Email">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3" style="padding-left: 12px; padding-right: 12px;">
+                        <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="4" placeholder="Your Message"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-auto ms-auto">
+                            <button type="submit" class="btn btn-primary btn-sm mb-3">SEND MESSAGE</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}
